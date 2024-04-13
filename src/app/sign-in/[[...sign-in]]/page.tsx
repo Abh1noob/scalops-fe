@@ -7,7 +7,7 @@ export default function Page() {
       <div className="flex flex-col">
           <Navbar/>
         <div className="flex items-center justify-center h-[92vh]">
-          <SignIn />
+          <SignIn redirectUrl={"/details"} />
         </div>
       </div>
     </>

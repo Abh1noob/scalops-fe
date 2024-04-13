@@ -10,11 +10,13 @@ import StoreHome from "@/components/store/home";
 import Page1 from "@/components/store/page1";
 import Page2 from "@/components/store/page2";
 import Page3 from "@/components/store/page3";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [currentComponent, setCurrentComponent] = useState(0);
   const [cookieValue, setCookieValue] = useState("");
 
+  const router = useRouter();
   const getCookieValue = async () => {
     try {
       const cookie = getCookie("__session");
@@ -79,8 +81,15 @@ const Page = () => {
   };
 
   const handleSubmit = () => {
-    submitKYC({ documentType: "", documentUpload: "" });
+    // submitKYC({ documentType: "", documentUpload: "" });
+    router.push("/dashboard");
   };
+
+  // const handleStoreName = () =>{
+  //   const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/store`, {
+
+  //   }}
+  // }
 
   return (
     <div className="overflow-hidden h-screen">
@@ -102,6 +111,16 @@ const Page = () => {
         {currentComponent === 1 && (
           <div className="absolute bottom-0 right-8">
             <PrimaryButton label="Get Started" onClick={handleNext} />
+          </div>
+        )}
+        {currentComponent === 2 && (
+          <div className="absolute bottom-0 right-8">
+            <PrimaryButton label="Next" onClick={handleNext} />
+          </div>
+        )}
+        {currentComponent === 4 && (
+          <div className="absolute bottom-0 right-8">
+            <PrimaryButton label="Skip" onClick={handleNext} />
           </div>
         )}
         {currentComponent != 0 &&

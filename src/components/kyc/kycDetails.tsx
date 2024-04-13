@@ -33,7 +33,7 @@ const KycDetails = () => {
             <p className="text-[#8075FF] mb-1">Document Type</p>
             <select
               id="documentType"
-              className="h-12 w-[80vw] bg-[#F1F1F1] rounded-lg p-2"
+              className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
               defaultValue="- select -"
             >
               <option>- select -</option>
@@ -46,7 +46,7 @@ const KycDetails = () => {
             <input
               id="documentUpload"
               type="file"
-              className="h-12 w-[80vw] bg-[#F1F1F1] flex py-auto rounded-lg p-2"
+              className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
               onChange={handleFileChange}
             />
             {uploadedFileName && (

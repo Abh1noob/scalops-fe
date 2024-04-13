@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
+import toast from "react-hot-toast";
 
 interface KYCStatus {
   status: string;
@@ -19,38 +20,42 @@ const Dashboard = () => {
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const getCookieValue = async () => {
-  //     try {
-  //       const cookie = getCookie("__session");
-  //       if (typeof cookie === "string") {
-  //         setCookieValue(cookie);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching cookie:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const getCookieValue = async () => {
+      try {
+        const cookie = getCookie("__session");
+        if (typeof cookie === "string") {
+          setCookieValue(cookie);
+        }
+      } catch (error) {
+        console.error("Error fetching cookie:", error);
+      }
+    };
 
-  //   const getKYCStatus = async () => {
-  //     try {
-  //       const resp = await axios.get<KYCStatus>(
-  //         `${process.env.NEXT_PUBLIC_APIURL}/test`,
-  //         {
-  //           headers: {
-  //             "ngrok-skip-browser-warning": "true",
-  //             Authorization: `Bearer ${cookieValue}`,
-  //           },
-  //           withCredentials: true,
-  //         }
-  //       );
-  //       setKYCStatus(resp.data);
-  //     } catch (error) {
-  //       console.error("Error fetching KYC status:", error);
-  //     }
-  //   };
-  //   getKYCStatus();
-  //   getCookieValue();
-  // }, []);
+    const getKYCStatus = async () => {
+      const resp = await axios.get<KYCStatus>(
+        `${process.env.NEXT_PUBLIC_APIURL}/kyc/status`,
+        {
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+            Authorization: `Bearer ${cookieValue}`,
+          },
+          withCredentials: true,
+        }
+      );
+      setKYCStatus(resp.data);
+      console.log(kycStatus);
+    };
+    
+    toast.promise(getKYCStatus(), {
+      loading: "Loading...",
+      success: "Success!",
+      error: "Error!",
+    });
+
+    getCookieValue();
+    // getKYCStatus();
+  }, []);
 
   return (
     <div>
