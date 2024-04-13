@@ -40,7 +40,7 @@ const AddItem = () => {
       const formData = new FormData();
       formData.append("file", blob, "audio.webm");
       const response = await axios.post(
-        `/api/catalogue/speak`,
+        `${process.env.NEXT_PUBLIC_APIURL}/catalogue/speak`,
         formData,
         {
           headers: {

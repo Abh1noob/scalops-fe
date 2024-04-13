@@ -10,7 +10,7 @@ import Image from "next/image";
 const Navbar = () => {
 
   return (
-    <div className="w-screen min-h-[8vh] bg-[#8075FF] rounded-b-[40px] flex items-center justify-center">
+    <div className="w-screen min-h-[8vh] bg-[#8075FF] flex items-center justify-center">
       <div className="flex justify-end w-[90vw] items-center">
         <div className="absolute flex items-center justify-center w-[90vw]">
           <Image

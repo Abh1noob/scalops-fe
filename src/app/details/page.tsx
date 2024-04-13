@@ -11,6 +11,7 @@ import Page1 from "@/components/store/page1";
 import Page2 from "@/components/store/page2";
 import Page3 from "@/components/store/page3";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Page = () => {
   const [currentComponent, setCurrentComponent] = useState(0);
@@ -27,10 +28,6 @@ const Page = () => {
       console.error("Error fetching cookie:", error);
     }
   };
-
-  useEffect(() => {
-    getCookieValue();
-  }, []);
 
   const handleNext = () => {
     if (currentComponent < 1) {
@@ -61,35 +58,53 @@ const Page = () => {
     }
   };
 
-  interface submitKYCProps {
-    documentType: string;
-    documentUpload: string;
-  }
+  const submitKYC = async () => {
+    getCookieValue();
+    console.log("BKL COOKIE:",cookieValue)
+    const documentTypeElement = document.getElementById(
+      "documentType"
+    ) as HTMLInputElement;
 
-  const submitKYC = async (props: submitKYCProps) => {
+    const documentUploadElement = document.getElementById(
+      "documentUpload"
+    ) as HTMLInputElement;
+
+    if (!documentTypeElement || !documentUploadElement) {
+      throw new Error("Document type or upload element not found");
+    }
+
+    const documentType = documentTypeElement.value;
+    const documentFile = documentUploadElement.files![0];
+
+    if (!documentFile) {
+      throw new Error("No file uploaded");
+    }
+
+    const formData = new FormData();
+    formData.append("type", documentType);
+    formData.append("file", documentFile);
+
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/kyc`,
-      props,
+      `${process.env.NEXT_PUBLIC_APIURL}/kyc`,
+      formData,
       {
         headers: {
           "ngrok-skip-browser-warning": "true",
           Authorization: `Bearer ${cookieValue}`,
+          "Content-Type": "multipart/form-data",
         },
-        withCredentials: true,
       }
     );
   };
 
   const handleSubmit = () => {
-    // submitKYC({ documentType: "", documentUpload: "" });
-    router.push("/dashboard");
+    // toast.promise(submitKYC(), {
+    //   loading: "Loading...",
+    //   success: "Success!",
+    //   error: "Error!",
+    // });
+    setCurrentComponent(currentComponent + 1);
   };
-
-  // const handleStoreName = () =>{
-  //   const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/store`, {
-
-  //   }}
-  // }
 
   return (
     <div className="overflow-hidden h-screen">
@@ -105,7 +120,7 @@ const Page = () => {
       <div className="flex flex-row gap-4 w-screen items-center justify-between px-8 bottom-10 absolute">
         {currentComponent === 0 && (
           <div className="absolute bottom-0 right-8">
-            <PrimaryButton label="Submit" onClick={handleNext} />
+            <PrimaryButton label="Submit" onClick={handleSubmit} />
           </div>
         )}
         {currentComponent === 1 && (

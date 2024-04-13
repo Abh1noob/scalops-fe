@@ -10,7 +10,7 @@ interface CatalogueButtonProps {
 const CatalogueButton = (props: CatalogueButtonProps) => {
   return (
     <div
-      className="w-[80vw] h-12 flex flex-row rounded-[20px] bg-[#8075FF]"
+      className="w-[80vw] h-12 flex flex-row rounded-[20px] bg-[#8075FF] text-white"
       onClick={props.onClick}
     >
       <div className="w-[20%] flex flex-row justify-end items-center">
