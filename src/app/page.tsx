@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@clerk/nextjs";
 import { useEffect } from "react";
 import Navbar from "@/components/navbar";
 import PrimaryButton from "@/components/primaryButton";
@@ -8,28 +7,10 @@ import Image from "next/image";
 import image1 from "../../public/assets/images/root/home.svg";
 
 export default function Home() {
-  const { userId } = useAuth();
   const router = useRouter();
-
-  const handleSignIn = () => {
-    if (userId) {
-      router.push("/dashboard");
-    } else {
-      router.push("/sign-in");
-    }
-  };
-
-  const handleSignUp = () => {
-    if (userId) {
-      router.push("/dashboard");
-    } else {
-      router.push("/sign-up");
-    }
-  };
-
-  useEffect(() => {
-    console.log(userId);
-  }, []);
+  
+  const handleSignUp = () => {};
+  const handleSignIn = () => {};
 
   return (
     <>

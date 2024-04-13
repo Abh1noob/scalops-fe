@@ -1,20 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import details1 from "../../../public/assets/images/details/details1.svg";
-import PrimaryButton from "../primaryButton";
 
 const StoreHome = () => {
   const [userName, setUserName] = useState("");
-  const { user } = useUser();
-
-  useEffect(() => {
-    const fetchUsername = async () => {
-      setUserName(user!.firstName!);
-    };
-    fetchUsername();
-  }, []);
 
   return (
     <div className="">
@@ -30,8 +20,10 @@ const StoreHome = () => {
       />
       <div className="flex w-screen mx-auto justify-center top-[60vh] absolute z-50 flex-col">
         <div className="mx-5 flex flex-col items-center justify-center">
-          <h1 className="text-center text-5xl
-           my-6">
+          <h1
+            className="text-center text-5xl
+           my-6"
+          >
             Let&apos;s create your store.
           </h1>
           <p className="text-[#211A1D] text-center font-montserrat">

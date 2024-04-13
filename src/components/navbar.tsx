@@ -1,9 +1,5 @@
 "use client";
 import React from "react";
-import {
-  SignedIn,
-  UserButton,
-} from "@clerk/nextjs";
 import logo from "../../public/logo.svg";
 import Image from "next/image";
 
@@ -21,11 +17,6 @@ const Navbar = () => {
             className="h-[10] w-fit mb-1"
           />
         </div>
-
-        <SignedIn>
-          {/* Mount the UserButton component */}
-          <UserButton />
-        </SignedIn>
       </div>
     </div>
   );
