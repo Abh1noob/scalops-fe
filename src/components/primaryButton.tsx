@@ -8,7 +8,7 @@ interface PrimaryButtonProps {
 const PrimaryButton = (props: PrimaryButtonProps) => {
   return (
     <div
-      className="bg-[#8075FF] h-10 w-[25vw] flex items-center justify-center rounded-[20px] p-2 font-medium text-md"
+      className="bg-[#8075FF] h-10 w-[25vw] flex items-center justify-center rounded-[20px] p-2 font-medium text-sm"
       onClick={props.onClick}
     >
       {props.label}

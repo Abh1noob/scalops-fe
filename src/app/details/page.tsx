@@ -61,25 +61,21 @@ const Page = () => {
   }
 
   const submitKYC = async (props: submitKYCProps) => {
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/kyc`,
-        props,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "true",
-            Authorization: `Bearer ${cookieValue}`,
-          },
-          withCredentials: true,
-        }
-      );
-    } catch (error) {
-      console.error("Error submitting KYC:", error);
-    }
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/kyc`,
+      props,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+          Authorization: `Bearer ${cookieValue}`,
+        },
+        withCredentials: true,
+      }
+    );
   };
 
   const handleSubmit = () => {
-    submitKYC({documentType: "", documentUpload: ""});
+    submitKYC({ documentType: "", documentUpload: "" });
   };
 
   return (
