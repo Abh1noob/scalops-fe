@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.cl-internal-b3fm6y{
-    opacity: 0;
+/* Clerk Component Styles */
+
+.cl-internal-b3fm6y {
+  opacity: 0;
+}
+
+.cl-formButtonPrimary {
+  background-color: #8075ff;
+  color: #211a1d;
+  border-radius: 20px;
+}
+
+.cl-footerActionLink {
+  color: #8075ff;
 }

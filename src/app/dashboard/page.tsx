@@ -17,6 +17,21 @@ const Dashboard = () => {
   const [kycStatus, setKYCStatus] = useState<KYCStatus | null>(null);
   const [cookieValue, setCookieValue] = useState("");
 
+  const getCookieValue = async () => {
+    try {
+      const cookie = getCookie("__session");
+      if (typeof cookie === "string") {
+        setCookieValue(cookie);
+      }
+    } catch (error) {
+      console.error("Error fetching cookie:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCookieValue();
+  }, []);
+
   const router = useRouter();
 
   const getKYCStatus = async () => {
@@ -36,21 +51,6 @@ const Dashboard = () => {
       console.error("Error fetching KYC status:", error);
     }
   };
-
-  const getInitialValue = async () => {
-    try {
-      const cookie = getCookie("__session");
-      if (typeof cookie === "string") {
-        setCookieValue(cookie);
-      }
-    } catch (error) {
-      console.error("Error fetching cookie:", error);
-    }
-  };
-
-  useEffect(() => {
-    getInitialValue();
-  }, []);
 
   // useEffect(() => {
   //   if (kycStatus) {
@@ -73,7 +73,7 @@ const Dashboard = () => {
       <Navbar />
       <div>
         <button onClick={getKYCStatus}>Fetch KYC Status</button>
-        <button onClick={getInitialValue}>lmao</button>
+        <button onClick={getCookieValue}>lmao</button>
       </div>
     </div>
   );
