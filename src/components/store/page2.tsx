@@ -21,7 +21,9 @@ const Page2 = () => {
     setCountry(storedCountry);
   }, []);
 
-  const handleAddressChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleAddressChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const newAddress = event.target.value;
     setAddress(newAddress);
     localStorage.setItem("address", newAddress);
@@ -55,12 +57,10 @@ const Page2 = () => {
     <div className="m-8">
       <div className="flex flex-row gap-10">
         <div>2/3</div>
-        <div>Store Creation</div>
+        <div className="font-montserrat">Store Creation</div>
       </div>
-      <h1 className="my-4 text-3xl font-semibold text-[#211A1D]">
-        Enter Store Address
-      </h1>
-      <p className="text-[#211A1D]">
+      <h1 className="my-4 text-3xl text-[#211A1D]">Enter Store Address</h1>
+      <p className="text-[#211A1D] font-montserrat">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu blandit
         elit, in ligula.
       </p>

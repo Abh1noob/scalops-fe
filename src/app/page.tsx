@@ -35,7 +35,7 @@ export default function Home() {
     <>
       <Navbar />
       <div className="w-[90vw] mx-auto">
-        <h1 className="self-start text-3xl font-semibold text-[#211A1D] my-6">
+        <h1 className="self-start text-3xl  text-[#211A1D] my-6">
           Grow With Us
         </h1>
         <h6 className="self-start text-base text-[#211A1D]">

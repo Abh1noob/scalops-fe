@@ -6,7 +6,7 @@ const Page3 = () => {
     <div className="m-8">
       <div className="flex flex-row gap-10">
         <div>3/3</div>
-        <div>Store Creation</div>
+        <div className="font-montserrat">Store Creation</div>
       </div>
       <AddItem />
     </div>

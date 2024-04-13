@@ -18,7 +18,7 @@ const StoreHome = () => {
 
   return (
     <div className="">
-      <h1 className="text-center my-6 text-3xl font-semibold text-[#211A1D]">
+      <h1 className="text-center my-6 text-3xl text-[#211A1D]">
         Welcome {userName}
       </h1>
       <Image
@@ -30,10 +30,11 @@ const StoreHome = () => {
       />
       <div className="flex w-screen mx-auto justify-center top-[60vh] absolute z-50 flex-col">
         <div className="mx-5 flex flex-col items-center justify-center">
-          <h1 className="text-center text-5xl font-semibold my-6">
+          <h1 className="text-center text-5xl
+           my-6">
             Let&apos;s create your store.
           </h1>
-          <p className="text-[#211A1D] text-center">
+          <p className="text-[#211A1D] text-center font-montserrat">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu
             blandit elit, in ligula.
           </p>

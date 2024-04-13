@@ -27,7 +27,7 @@ const KycDetails = () => {
   return (
     <div>
       <div className="mx-auto items-start flex flex-col mt-8 w-[80vw] h-fit justify-around">
-        <h1 className="self-start text-3xl font-semibold">KYC Details</h1>
+        <h1 className="self-start text-3xl ">KYC Details</h1>
         <div className="items-center flex flex-col ">
           <div className="my-2">
             <p className="text-[#8075FF] mb-1">Document Type</p>

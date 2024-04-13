@@ -21,7 +21,9 @@ const BankDetails = () => {
     setBankName(storedBankName);
   }, []);
 
-  const handleBeneficiaryNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBeneficiaryNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const newName = event.target.value;
     setBeneficiaryName(newName);
     localStorage.setItem("beneficiaryName", newName);
@@ -33,7 +35,9 @@ const BankDetails = () => {
     localStorage.setItem("ifscCode", newIfscCode);
   };
 
-  const handleAccountNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAccountNumberChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const newAccountNumber = event.target.value;
     setAccountNumber(newAccountNumber);
     localStorage.setItem("accountNumber", newAccountNumber);
@@ -54,10 +58,10 @@ const BankDetails = () => {
   return (
     <>
       <div className="mx-auto items-start flex flex-col mt-8 w-[80vw] h-fit justify-around">
-        <h1 className="self-start text-3xl font-semibold">Bank Details</h1>
+        <h1 className="self-start text-3xl ">Bank Details</h1>
         <div className="items-center flex flex-col">
           <div className="my-2">
-            <p className="text-[#8075FF] mb-1">Beneficiary Name</p>
+            <p className="text-[#211A1D] mb-1">Beneficiary Name</p>
             <input
               className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={beneficiaryName}
@@ -66,7 +70,7 @@ const BankDetails = () => {
             ></input>
           </div>
           <div className="my-2">
-            <p className="text-[#8075FF] mb-1">IFSC Code</p>
+            <p className="text-[#211A1D] mb-1">IFSC Code</p>
             <input
               className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={ifscCode}
@@ -75,7 +79,7 @@ const BankDetails = () => {
             ></input>
           </div>
           <div className="my-2">
-            <p className="text-[#8075FF] mb-1">Account Number</p>
+            <p className="text-[#211A1D] mb-1">Account Number</p>
             <input
               className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={accountNumber}
@@ -84,7 +88,7 @@ const BankDetails = () => {
             ></input>
           </div>
           <div className="my-2">
-            <p className="text-[#8075FF] mb-1">Branch</p>
+            <p className="text-[#211A1D] mb-1">Branch</p>
             <input
               className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={branch}
@@ -93,7 +97,7 @@ const BankDetails = () => {
             ></input>
           </div>
           <div className="my-2">
-            <p className="text-[#8075FF] mb-1">Bank Name</p>
+            <p className="text-[#211A1D] mb-1">Bank Name</p>
             <input
               className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={bankName}

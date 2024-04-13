@@ -72,10 +72,10 @@ const AddItem = () => {
 
   return (
     <div>
-      <h1 className="my-4 text-3xl font-semibold text-[#211A1D]">
+      <h1 className="my-4 text-3xl text-[#211A1D]">
         Add items in your catalogue
       </h1>
-      <p className="text-[#211A1D]">
+      <p className="text-[#211A1D] font-montserrat ">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu blandit
         elit, in ligula.
       </p>

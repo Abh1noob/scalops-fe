@@ -46,12 +46,12 @@ const Dashboard = () => {
       setKYCStatus(resp.data);
       console.log(kycStatus);
     };
-    
-    toast.promise(getKYCStatus(), {
-      loading: "Loading...",
-      success: "Success!",
-      error: "Error!",
-    });
+
+    // toast.promise(getKYCStatus(), {
+    //   loading: "Loading...",
+    //   success: "Success!",
+    //   error: "Error!",
+    // });
 
     getCookieValue();
     // getKYCStatus();
@@ -60,7 +60,11 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      Dashboard
+      <div className="m-8">
+        <h1 className="my-4 text-3xl text-[#211A1D]">
+          Inventory
+        </h1>
+      </div>
     </div>
   );
 };
