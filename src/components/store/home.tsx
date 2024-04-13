@@ -31,7 +31,7 @@ const StoreHome = () => {
       <div className="flex w-screen mx-auto justify-center top-[60vh] absolute z-50 flex-col">
         <div className="mx-5 flex flex-col items-center justify-center">
           <h1 className="text-center text-5xl font-semibold my-6">
-            Let's create your store.
+            Let&apos;s create your store.
           </h1>
           <p className="text-[#211A1D] text-center">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu
