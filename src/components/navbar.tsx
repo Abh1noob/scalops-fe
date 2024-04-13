@@ -1,20 +1,13 @@
 "use client";
 import React from "react";
 import {
-  ClerkProvider,
   SignedIn,
-  SignedOut,
-  SignInButton,
-  useClerk,
   UserButton,
 } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import logo from "../../public/logo.svg";
 import Image from "next/image";
 
 const Navbar = () => {
-  const { signOut } = useClerk();
-  const router = useRouter();
 
   return (
     <div className="w-screen min-h-[8vh] bg-[#8075FF] rounded-b-[40px] flex items-center justify-center">

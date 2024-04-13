@@ -36,7 +36,7 @@ export default function Home() {
       <Navbar />
       <div className="w-[90vw] mx-auto">
         <h1 className="self-start text-3xl font-semibold text-[#211A1D] my-6">
-          Scalops
+          Grow With Us
         </h1>
         <h6 className="self-start text-base text-[#211A1D]">
           ONDC Sellers platform which will break market like he broke yo mom
