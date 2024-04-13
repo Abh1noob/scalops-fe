@@ -6,6 +6,10 @@ import PrimaryButton from "@/components/primaryButton";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
+import StoreHome from "@/components/store/home";
+import Page1 from "@/components/store/page1";
+import Page2 from "@/components/store/page2";
+import Page3 from "@/components/store/page3";
 
 const Page = () => {
   const [currentComponent, setCurrentComponent] = useState(0);
@@ -28,8 +32,6 @@ const Page = () => {
 
   const handleNext = () => {
     if (currentComponent < 1) {
-      setCurrentComponent(currentComponent + 1);
-
       const documentTypeElement = document.getElementById(
         "documentType"
       ) as HTMLInputElement;
@@ -48,6 +50,7 @@ const Page = () => {
         localStorage.setItem("kycData", JSON.stringify(kycData));
       }
     }
+    setCurrentComponent(currentComponent + 1);
   };
 
   const handleDecrement = () => {
@@ -55,6 +58,7 @@ const Page = () => {
       setCurrentComponent(currentComponent - 1);
     }
   };
+
   interface submitKYCProps {
     documentType: string;
     documentUpload: string;
@@ -79,17 +83,36 @@ const Page = () => {
   };
 
   return (
-    <div>
+    <div className="overflow-hidden h-screen">
       <Navbar />
-      <div className="h-fit">
-        {currentComponent === 0 ? <KycDetails /> : <BankDetails />}
+      <div className="">
+        {currentComponent === 0 && <KycDetails />}
+        {currentComponent === 1 && <StoreHome />}
+        {currentComponent === 2 && <Page1 />}
+        {currentComponent === 3 && <Page2 />}
+        {currentComponent === 4 && <Page3 />}
+        {currentComponent === 5 && <BankDetails />}
       </div>
-      <div className="flex flex-row gap-4 w-screen justify-center mt-8">
-        {currentComponent === 0 ? (
-          <>
-            <PrimaryButton label="Next" onClick={handleNext} />
-          </>
-        ) : (
+      <div className="flex flex-row gap-4 w-screen items-center justify-between px-8 bottom-10 absolute">
+        {currentComponent === 0 && (
+          <div className="absolute bottom-0 right-8">
+            <PrimaryButton label="Submit" onClick={handleNext} />
+          </div>
+        )}
+        {currentComponent === 1 && (
+          <div className="absolute bottom-0 right-8">
+            <PrimaryButton label="Get Started" onClick={handleNext} />
+          </div>
+        )}
+        {currentComponent != 0 &&
+          currentComponent != 1 &&
+          currentComponent != 5 && (
+            <>
+              <PrimaryButton label="Prev" onClick={handleDecrement} />
+              <PrimaryButton label="Next" onClick={handleNext} />
+            </>
+          )}
+        {currentComponent === 5 && (
           <>
             <PrimaryButton label="Prev" onClick={handleDecrement} />
             <PrimaryButton label="Submit" onClick={handleSubmit} />
