@@ -65,17 +65,17 @@ const Page2 = () => {
         elit, in ligula.
       </p>
 
-      <div className="mb-2 mt-6">
+      <div className="mb-2 mt-6 ">
         <p className="text-[#211A1D] mb-1">Address</p>
         <textarea
-          className="h-fit w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+          className="h-fit w-full bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
           placeholder="Enter the address of your store"
           rows={3}
           value={address}
           onChange={handleAddressChange}
         ></textarea>
       </div>
-      <div className="flex flex-col w-[80vw] justify-between">
+      <div className="flex flex-col w-full justify-between">
         <div className="flex flex-row justify-between">
           <div className="mb-2 mt-6">
             <p className="text-[#211A1D] mb-1">City</p>

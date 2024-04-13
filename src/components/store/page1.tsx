@@ -32,7 +32,7 @@ const Page1 = () => {
       <div className="mb-2 mt-6">
         <p className="text-[#211A1D] mb-1">Store Name</p>
         <input
-          className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+          className="h-12 w-full bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
           placeholder="Enter the name of your store"
           id="storeName"
           value={storeName} 
