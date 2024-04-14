@@ -50,7 +50,6 @@ const Dashboard = () => {
             router.push("/details");
           } else {
             console.error("Error:", axiosError);
-            toast.error(`Error: ${axiosError.message}`);
           }
         } else {
           console.error("Error:", error);

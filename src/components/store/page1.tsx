@@ -3,7 +3,7 @@ import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
 import { usePageCountStore } from "@/store/store";
 
 const Page1 = () => {
-  const [storeName, setStoreName] = useState<string>("");
+  const [name, setname] = useState<string>("");
   const { pageCount, setPageCount } = usePageCountStore();
 
   const handleNext = () => {
@@ -19,13 +19,13 @@ const Page1 = () => {
   useEffect(() => {
     const storedName = localStorage.getItem("name");
     if (storedName) {
-      setStoreName(storedName);
+      setname(storedName);
     }
   }, []);
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
-    setStoreName(newName);
+    setname(newName);
     localStorage.setItem("name", newName);
   };
 
@@ -58,8 +58,8 @@ const Page1 = () => {
         <input
           className="h-12 w-full bg-white rounded-lg placeholder:text-[12px] p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
           placeholder="Enter the name of your store"
-          id="storeName"
-          value={storeName}
+          id="name"
+          value={name}
           onChange={handleOnChange}
         ></input>
       </div>

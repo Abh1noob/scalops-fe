@@ -31,7 +31,7 @@ export default function Home() {
             <PrimaryButton label="Get Started" onClick={handleSignUp} />
             <PrimaryButton label="Sign In" onClick={handleSignIn} />
           </div>
-          <div className="h-full mt-20 bg-black">
+          <div className="h-full mt-20 ">
             <Image
               src={image1}
               alt="image1"

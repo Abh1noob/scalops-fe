@@ -36,7 +36,7 @@ const SignIn = () => {
       localStorage.setItem("access_token", response.data.data.token);
       toast.dismiss();
       toast.success("Success!");
-      // window.location.href = "/dashboard";
+      window.location.href = "/dashboard";
     } catch (error: any) {
       if (axios.isAxiosError(error) && error.response) {
         toast.dismiss();

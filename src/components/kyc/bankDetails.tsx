@@ -3,13 +3,17 @@ import React, { useEffect, useState } from "react";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import PrimaryButton from "../primaryButton";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { headers } from "next/headers";
 
 const BankDetails = () => {
-  const [beneficiaryName, setBeneficiaryName] = useState<string>("");
-  const [ifscCode, setIfscCode] = useState<string>("");
-  const [accountNumber, setAccountNumber] = useState<string>("");
+  const [beneficiary, setBeneficiaryName] = useState<string>("");
+  const [ifsc_code, setIfscCode] = useState<string>("");
+  const [account_number, setAccountNumber] = useState<string>("");
   const [branch, setBranch] = useState<string>("");
-  const [bankName, setBankName] = useState<string>("");
+  const [bank_name, setBankName] = useState<string>("");
+  const [curr_balance, setCurrBalance] = useState<string>("");
   const { pageCount, setPageCount } = usePageCountStore();
 
   const router = useRouter();
@@ -65,13 +69,73 @@ const BankDetails = () => {
     localStorage.setItem("bankName", newBankName);
   };
 
-  const handleSubmit = () =>{
-    router.push("/dashboard")
-  }
+  const handleCurrBalanceChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newCurrBalance = event.target.value;
+    setCurrBalance(newCurrBalance);
+    localStorage.setItem("currBalance", newCurrBalance);
+  };
+
+  const handleSubmit = async () => {
+    toast.loading("Loading...");
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_APIURL}/store`,
+        {
+          name: localStorage.getItem("name"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.dismiss();
+        toast.error(`Error: ${error.response.status}`);
+      } else {
+        toast.dismiss();
+        toast.error(`Error: ${error}`);
+      }
+    }
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_APIURL}/account`,
+        {
+          beneficiary: localStorage.getItem("beneficiary"),
+          ifsc_code: localStorage.getItem("ifsc_code"),
+          account_number: localStorage.getItem("account_number"),
+          curr_balance: localStorage.getItem("curr_balance"),
+          bank_name: localStorage.getItem("bank_name"),
+          branch: localStorage.getItem("branch"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
+      toast.dismiss();
+      toast.success("Success!");
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response) {
+        toast.dismiss();
+        toast.error(`Error: ${error.response.status}`);
+      } else {
+        toast.dismiss();
+        toast.error(`Error: ${error}`);
+      }
+    }
+
+    router.push("/dashboard");
+  };
 
   return (
     <>
-      <div className="mx-auto items-start flex flex-col mt-8 w-[80vw] h-fit justify-around">
+      <div className="mx-auto items-start flex flex-col mt-8 w-[80vw] justify-around h-[80vh] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-row justify-between items-center w-full">
           <RiArrowLeftSLine
             size={30}
@@ -90,7 +154,7 @@ const BankDetails = () => {
             <p className="text-[#211A1D] mb-1">Beneficiary Name</p>
             <input
               className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
-              value={beneficiaryName}
+              value={beneficiary}
               placeholder="Enter Beneficiary Name"
               onChange={handleBeneficiaryNameChange}
             ></input>
@@ -99,7 +163,7 @@ const BankDetails = () => {
             <p className="text-[#211A1D] mb-1">IFSC Code</p>
             <input
               className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
-              value={ifscCode}
+              value={ifsc_code}
               placeholder="XXXXXXXXXXX"
               onChange={handleIfscCodeChange}
             ></input>
@@ -108,7 +172,7 @@ const BankDetails = () => {
             <p className="text-[#211A1D] mb-1">Account Number</p>
             <input
               className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
-              value={accountNumber}
+              value={account_number}
               placeholder="0000000000"
               onChange={handleAccountNumberChange}
             ></input>
@@ -126,9 +190,20 @@ const BankDetails = () => {
             <p className="text-[#211A1D] mb-1">Bank Name</p>
             <input
               className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
-              value={bankName}
+              value={bank_name}
               placeholder="Enter Bank Name"
               onChange={handleBankNameChange}
+            ></input>
+          </div>
+
+          <div className="my-2">
+            <p className="text-[#211A1D] mb-1">Current Balance</p>
+            <input
+              type="number"
+              className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
+              value={curr_balance}
+              placeholder="Enter Bank Name"
+              onChange={handleCurrBalanceChange}
             ></input>
           </div>
 
