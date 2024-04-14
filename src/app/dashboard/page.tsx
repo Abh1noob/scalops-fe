@@ -1,9 +1,8 @@
 "use client";
 import Navbar from "@/components/navbar";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getCookie } from "cookies-next";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import PrimaryButton from "@/components/primaryButton";
@@ -12,51 +11,55 @@ interface KYCStatus {
   status: string;
   message: string;
   data: {
-    kyc: string;
+    status: string;
   };
 }
 
 const Dashboard = () => {
   const [kycStatus, setKYCStatus] = useState<KYCStatus | null>(null);
-  const [cookieValue, setCookieValue] = useState("");
-
   const router = useRouter();
 
   useEffect(() => {
-    const getCookieValue = async () => {
+    const getKYCStatus = async () => {
       try {
-        const cookie = getCookie("__session");
-        if (typeof cookie === "string") {
-          setCookieValue(cookie);
+        const resp = await axios.get<KYCStatus>(
+          `${process.env.NEXT_PUBLIC_APIURL}/kyc/status`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
+        setKYCStatus(resp.data);
+        console.log(resp.data.data.status);
+
+        switch (resp.data.data.status) {
+          case "PENDING":
+            toast.error("KYC Approval Pending");
+            break;
+          case "REJECTED":
+            toast.error("KYC Rejected");
+            break;
+          default:
+            break;
         }
       } catch (error) {
-        console.error("Error fetching cookie:", error);
+        if (axios.isAxiosError(error)) {
+          const axiosError = error as AxiosError;
+          if (axiosError.response && axiosError.response.status === 404) {
+            router.push("/details");
+          } else {
+            console.error("Error:", axiosError);
+            toast.error(`Error: ${axiosError.message}`);
+          }
+        } else {
+          console.error("Error:", error);
+          toast.error(`Error: ${error}`);
+        }
       }
     };
 
-    const getKYCStatus = async () => {
-      const resp = await axios.get<KYCStatus>(
-        `${process.env.NEXT_PUBLIC_APIURL}/kyc/status`,
-        {
-          headers: {
-            "ngrok-skip-browser-warning": "true",
-            Authorization: `Bearer ${cookieValue}`,
-          },
-          withCredentials: true,
-        }
-      );
-      setKYCStatus(resp.data);
-      console.log(kycStatus);
-    };
-
-    // toast.promise(getKYCStatus(), {
-    //   loading: "Loading...",
-    //   success: "Success!",
-    //   error: "Error!",
-    // });
-
-    getCookieValue();
-    // getKYCStatus();
+    getKYCStatus();
   }, []);
 
   return (

@@ -3,7 +3,6 @@ import Navbar from "@/components/navbar";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getCookie } from "cookies-next";
 import toast from "react-hot-toast";
 
 interface KYCStatus {
@@ -16,29 +15,17 @@ interface KYCStatus {
 
 const Inventory = () => {
   const [kycStatus, setKYCStatus] = useState<KYCStatus | null>(null);
-  const [cookieValue, setCookieValue] = useState("");
 
   const router = useRouter();
 
   useEffect(() => {
-    const getCookieValue = async () => {
-      try {
-        const cookie = getCookie("__session");
-        if (typeof cookie === "string") {
-          setCookieValue(cookie);
-        }
-      } catch (error) {
-        console.error("Error fetching cookie:", error);
-      }
-    };
-
     const getKYCStatus = async () => {
       const resp = await axios.get<KYCStatus>(
         `${process.env.NEXT_PUBLIC_APIURL}/kyc/status`,
         {
           headers: {
             "ngrok-skip-browser-warning": "true",
-            Authorization: `Bearer ${cookieValue}`,
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
           withCredentials: true,
         }
@@ -47,14 +34,6 @@ const Inventory = () => {
       console.log(kycStatus);
     };
 
-    // toast.promise(getKYCStatus(), {
-    //   loading: "Loading...",
-    //   success: "Success!",
-    //   error: "Error!",
-    // });
-
-    getCookieValue();
-    // getKYCStatus();
   }, []);
 
   return (

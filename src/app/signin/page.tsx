@@ -33,9 +33,10 @@ const SignIn = () => {
           password: password,
         }
       );
+      localStorage.setItem("access_token", response.data.data.token);
       toast.dismiss();
       toast.success("Success!");
-      window.location.href = "/dashboard";
+      // window.location.href = "/dashboard";
     } catch (error: any) {
       if (axios.isAxiosError(error) && error.response) {
         toast.dismiss();
@@ -51,9 +52,7 @@ const SignIn = () => {
       <Navbar />
       <div className="m-8">
         <div className="bg-white rounded-xl p-5">
-          <h1 className="self-start text-3xl  text-[#211A1D] mt-6">
-            Sign In
-          </h1>
+          <h1 className="self-start text-3xl  text-[#211A1D] mt-6">Sign In</h1>
           <h6 className="self-start text-base  text-[#211A1D]/70 mb-6">
             to continue to ScaleOps
           </h6>

@@ -5,7 +5,6 @@ import Navbar from "@/components/navbar";
 import PrimaryButton from "@/components/primaryButton";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { getCookie } from "cookies-next";
 import StoreHome from "@/components/store/home";
 import Page1 from "@/components/store/page1";
 import Page2 from "@/components/store/page2";
@@ -15,23 +14,9 @@ import { usePageCountStore } from "@/store/store";
 
 const Page = () => {
   const { pageCount, setPageCount } = usePageCountStore();
-  const [cookieValue, setCookieValue] = useState("");
   const router = useRouter();
 
-  const getCookieValue = async () => {
-    try {
-      const cookie = getCookie("__session");
-      if (typeof cookie === "string") {
-        setCookieValue(cookie);
-      }
-    } catch (error) {
-      console.error("Error fetching cookie:", error);
-    }
-  };
-
   const submitKYC = async () => {
-    getCookieValue();
-    console.log("BKL COOKIE:", cookieValue);
     const documentTypeElement = document.getElementById(
       "documentType"
     ) as HTMLInputElement;
@@ -61,7 +46,7 @@ const Page = () => {
       {
         headers: {
           "ngrok-skip-browser-warning": "true",
-          Authorization: `Bearer ${cookieValue}`,
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           "Content-Type": "multipart/form-data",
         },
       }

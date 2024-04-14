@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import CatalogueButton from "./catalogueButton";
 import PrimaryButton from "@/components/primaryButton";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
-import { getCookie } from "cookies-next";
 import Image from "next/image";
 import axios from "axios";
 import { FaMicrophone } from "react-icons/fa";
@@ -13,7 +12,6 @@ const AddItem = () => {
   const [audio, setAudio] = useState<Blob | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const [showAudio, setShowAudio] = useState(false);
-  const [cookieValue, setCookieValue] = useState("");
 
   const recorderControls = useAudioRecorder(
     {
@@ -47,7 +45,7 @@ const AddItem = () => {
         {
           headers: {
             "ngrok-skip-browser-warning": "true",
-            Authorization: `Bearer ${cookieValue}`,
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
           // withCredentials: true,
         }
@@ -57,20 +55,6 @@ const AddItem = () => {
       console.error("Error sending audio:", error);
     }
   };
-
-  useEffect(() => {
-    const getCookieValue = async () => {
-      try {
-        const cookie = getCookie("__session");
-        if (typeof cookie === "string") {
-          setCookieValue(cookie);
-        }
-      } catch (error) {
-        console.error("Error fetching cookie:", error);
-      }
-    };
-    getCookieValue();
-  }, []);
 
   return (
     <div>
@@ -84,7 +68,7 @@ const AddItem = () => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2 items-center mt-12">
           <CatalogueButton
-            children={<FaMicrophone />}
+            logo={<FaMicrophone />}
             label="Record audio describing item"
             onClick={toggleShowAudio}
           />
@@ -125,7 +109,7 @@ const AddItem = () => {
             <div className="w-[45%] h-[1px] bg-black" />
           </div>
           <CatalogueButton
-            children={<PiNotepad />}
+            logo={<PiNotepad />}
             label="Input item description manually"
             onClick={() => {}}
           />
