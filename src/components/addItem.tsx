@@ -12,6 +12,7 @@ const AddItem = () => {
   const [audio, setAudio] = useState<Blob | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const [showAudio, setShowAudio] = useState(false);
+  const [label, setLabel] = useState("Send");
 
   const recorderControls = useAudioRecorder(
     {
@@ -37,6 +38,7 @@ const AddItem = () => {
 
   const sendBlobOverAPI = async (blob: Blob) => {
     try {
+      setLabel("Sending...");
       const formData = new FormData();
       formData.append("file", blob, "audio.webm");
       const response = await axios.post(
@@ -53,6 +55,7 @@ const AddItem = () => {
       const responseDataString = JSON.stringify(response.data);
       console.log("Response:", response.data);
       localStorage.setItem("speakData", responseDataString);
+      setLabel("Sent!")
     } catch (error) {
       console.error("Error sending audio:", error);
     }
@@ -64,8 +67,8 @@ const AddItem = () => {
         Add items in your catalogue
       </h1>
       <p className="text-[#211A1D] font-montserrat ">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu blandit
-        elit, in ligula.
+        Incorporate a voice note stating the prices and quantities of your
+        products in stock, using your local language.
       </p>
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2 items-center mt-12">
@@ -88,7 +91,12 @@ const AddItem = () => {
                 showVisualizer={true}
               />
               <div className="flex flex-row gap-2">
-                <PrimaryButton label="Send" onClick={handleSubmit} />
+                <div
+                  className="bg-[#8075FF] text-white font-montserrat h-10 w-[30vw] flex items-center justify-center rounded-[20px] p-2 font-medium text-sm"
+                  onClick={handleSubmit}
+                >
+                  {label}
+                </div>
               </div>
               {audio && (
                 <div className="flex flex-row gap-2 items-center justify-center">
@@ -105,7 +113,7 @@ const AddItem = () => {
               )}
             </>
           )}
-          <div className="flex flex-row gap-0 w-[80vw] items-center justify-center">
+          {/* <div className="flex flex-row gap-0 w-[80vw] items-center justify-center">
             <div className="w-[45%] h-[1px] bg-black" />
             <div className="mx-2">or</div>
             <div className="w-[45%] h-[1px] bg-black" />
@@ -114,7 +122,7 @@ const AddItem = () => {
             logo={<PiNotepad />}
             label="Input item description manually"
             onClick={() => {}}
-          />
+          /> */}
         </div>
       </div>
     </div>

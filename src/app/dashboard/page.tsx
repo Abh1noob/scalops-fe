@@ -49,6 +49,11 @@ const Dashboard = () => {
           const axiosError = error as AxiosError;
           if (axiosError.response && axiosError.response.status === 404) {
             router.push("/details");
+          } else if (
+            axiosError.response?.status === 400 ||
+            axiosError.response?.status === 401
+          ) {
+            router.push("/signin");
           } else {
             console.error("Error:", axiosError);
           }
@@ -58,7 +63,6 @@ const Dashboard = () => {
         }
       }
     };
-
     getKYCStatus();
   }, []);
 

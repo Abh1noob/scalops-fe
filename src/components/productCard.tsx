@@ -1,6 +1,4 @@
 import React from "react";
-import { TiPencil } from "react-icons/ti";
-import { IoIosBarcode } from "react-icons/io";
 
 interface ProductCardProps {
   item: string;

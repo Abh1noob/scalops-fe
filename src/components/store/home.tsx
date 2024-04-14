@@ -29,8 +29,7 @@ const StoreHome = () => {
             Let&apos;s create your store.
           </h1>
           <p className="text-[#211A1D] text-center font-montserrat">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu
-            blandit elit, in ligula.
+            Lets quicky fill few details about your store and get started.
           </p>
           <div className="my-4">
             <PrimaryButton label="Get Started" onClick={handleNext} />

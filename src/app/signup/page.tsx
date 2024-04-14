@@ -35,7 +35,7 @@ const SignUp = () => {
       );
       toast.dismiss();
       toast.success("Success!");
-      window.location.href = "/dashboard";
+      window.location.href = "/signin";
     } catch (error: any) {
       if (axios.isAxiosError(error) && error.response) {
         toast.dismiss();

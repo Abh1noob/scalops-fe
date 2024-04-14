@@ -4,8 +4,8 @@
     "display": "fullscreen",
     "scope": "/",
     "start_url": "/",
-    "name": "Scalops",
-    "short_name": "Scalops",
+    "name": "Scaleops",
+    "short_name": "Scaleops",
     "icons": [
         {
             "src": "/icon-192x192.png",

@@ -81,28 +81,6 @@ const BankDetails = () => {
     toast.loading("Loading...");
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_APIURL}/store`,
-        {
-          name: localStorage.getItem("name"),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-    } catch (error: any) {
-      if (axios.isAxiosError(error) && error.response) {
-        toast.dismiss();
-        toast.error(`Error: ${error.response.status}`);
-      } else {
-        toast.dismiss();
-        toast.error(`Error: ${error}`);
-      }
-    }
-
-    try {
-      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_APIURL}/account`,
         {
           beneficiary: localStorage.getItem("beneficiary"),
@@ -143,7 +121,7 @@ const BankDetails = () => {
             onClick={handlePrev}
           />
           <div className="flex flex-row gap-2">
-            <div>4/4</div>
+            <div>2/2</div>
             <div className="font-montserrat">Store Creation</div>
           </div>
           <RiArrowRightSLine size={30} className="opacity-0 -mx-2" />

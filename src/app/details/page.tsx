@@ -6,9 +6,9 @@ import PrimaryButton from "@/components/primaryButton";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import StoreHome from "@/components/store/home";
-import Page1 from "@/components/store/page1";
+// import Page1 from "@/components/store/page1";
 import Page2 from "@/components/store/page2";
-import Page3 from "@/components/store/page3";
+// import Page3 from "@/components/store/page3";
 import { useRouter } from "next/navigation";
 import { usePageCountStore } from "@/store/store";
 
@@ -68,10 +68,10 @@ const Page = () => {
       <div className="">
         {pageCount === 0 && <KycDetails />}
         {pageCount === 1 && <StoreHome />}
-        {pageCount === 2 && <Page1 />}
-        {pageCount === 3 && <Page2 />}
-        {pageCount === 4 && <Page3 />}
-        {pageCount === 5 && <BankDetails />}
+        {/* {pageCount === 2 && <Page1 />} */}
+        {pageCount === 2 && <Page2 />}
+        {/* {pageCount === 4 && <Page3 />} */}
+        {pageCount === 3 && <BankDetails />}
       </div>
       <div className="flex flex-row gap-4 w-screen items-center justify-between px-8 bottom-10 absolute"></div>
     </div>

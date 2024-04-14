@@ -1,8 +1,9 @@
 import { usePageCountStore } from "@/store/store";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ChangeEvent } from "react";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
 const Page2 = () => {
+  const [name, setName] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [city, setCity] = useState<string>("");
   const [state, setState] = useState<string>("");
@@ -20,15 +21,16 @@ const Page2 = () => {
     console.log("New Page Count: ", pageCount);
     setPageCount(pageCount - 1);
   };
-  
 
   useEffect(() => {
+    const storedName = localStorage.getItem("name") || "";
     const storedAddress = localStorage.getItem("address") || "";
     const storedCity = localStorage.getItem("city") || "";
     const storedState = localStorage.getItem("state") || "";
     const storedZipCode = localStorage.getItem("zipCode") || "";
     const storedCountry = localStorage.getItem("country") || "";
 
+    setName(storedName);
     setAddress(storedAddress);
     setCity(storedCity);
     setState(storedState);
@@ -68,6 +70,12 @@ const Page2 = () => {
     localStorage.setItem("country", newCountry);
   };
 
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newName = event.target.value;
+    setName(newName);
+    localStorage.setItem("name", newName);
+  };
+
   return (
     <div className="m-8">
       <div className="flex flex-row justify-between items-center ">
@@ -77,7 +85,7 @@ const Page2 = () => {
           onClick={handlePrev}
         />
         <div className="flex flex-row gap-2">
-          <div>2/4</div>
+          <div>1/2</div>
           <div className="font-montserrat">Store Creation</div>
         </div>
         <RiArrowRightSLine
@@ -87,10 +95,16 @@ const Page2 = () => {
         />
       </div>
       <h1 className="my-4 text-3xl text-[#211A1D]">Enter Store Address</h1>
-      <p className="text-[#211A1D] font-montserrat">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu blandit
-        elit, in ligula.
-      </p>
+      <div className="mb-2 mt-6">
+        <p className="text-[#211A1D] mb-1">Store Name</p>
+        <input
+          className="h-12 w-full bg-white rounded-lg placeholder:text-[12px] p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
+          placeholder="Enter the name of your store"
+          id="name"
+          value={name}
+          onChange={handleOnChange}
+        ></input>
+      </div>
 
       <div className="mb-2 mt-6 ">
         <p className="text-[#211A1D] mb-1">Address</p>
