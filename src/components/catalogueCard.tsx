@@ -14,7 +14,7 @@ const CatalogueCard: React.FC<CatalogueCardProps> = ({
   return (
     <div className="bg-white m-2 rounded-lg flex flex-row p-4 gap-4 w-full">
       <div className="h-24 w-24 border-2 border-black rounded-xl bg-slate-400"></div>
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         <p className="font-bold font-montserrat text-xl">{item}</p>
         <p>₹{price}</p>
         <p>Quantity: {quantity}</p>

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import PrimaryButton from "@/components/primaryButton";
+import ProductCard from "@/components/productCard";
 
 interface KYCStatus {
   status: string;
@@ -97,14 +98,14 @@ const Dashboard = () => {
           />
         </div>
         <div
-          className="bg-[#8075FF] font-montserrat h-12 w-full flex items-center justify-center rounded-[20px] p-2 font-medium text-lg"
+          className="bg-[#8075FF] text-white font-montserrat h-12 w-full flex items-center justify-center rounded-[20px] p-2 font-medium text-lg"
           onClick={() => {}}
         >
           View full performance report
         </div>
 
         <div
-          className="bg-[#8075FF] font-montserrat h-12 w-full flex items-center justify-center rounded-[20px] p-2 font-medium text-lg mt-6"
+          className="bg-[#8075FF] text-white font-montserrat h-12 w-full flex items-center justify-center rounded-[20px] p-2 font-medium text-lg mt-6"
           onClick={() => {
             router.push("/catalogue");
           }}
@@ -112,6 +113,20 @@ const Dashboard = () => {
           Catalogue Update
         </div>
         <h1 className="my-4 text-3xl text-[#211A1D] mt-10">Popular Products</h1>
+        <div className="flex-row flex flex-wrap justify-between ">
+          <ProductCard item={"Product 1"} price={999} quantity={10} />
+          <ProductCard item={"Product 2"} price={799} quantity={20} />
+          <ProductCard item={"Product 3"} price={20} quantity={18} />
+          <ProductCard item={"Product 4"} price={599} quantity={5} />
+          <ProductCard item={"Product 5"} price={99} quantity={2} />
+          <ProductCard item={"Product 6"} price={29} quantity={82} />
+          <div className=" mx-auto my-6">
+            <PrimaryButton
+              label="View all products"
+              onClick={() => router.push("/inventory")}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
