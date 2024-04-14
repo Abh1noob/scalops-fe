@@ -115,7 +115,6 @@ const AddItem = () => {
             label="Input item description manually"
             onClick={() => {}}
           />
-          <p className="my-4">You can skip this section for now</p>
         </div>
       </div>
     </div>
