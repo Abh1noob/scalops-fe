@@ -1,4 +1,8 @@
+import { usePageCountStore } from "@/store/store";
 import React, { useEffect, useState } from "react";
+import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
+import PrimaryButton from "../primaryButton";
+import { useRouter } from "next/navigation";
 
 const BankDetails = () => {
   const [beneficiaryName, setBeneficiaryName] = useState<string>("");
@@ -6,6 +10,12 @@ const BankDetails = () => {
   const [accountNumber, setAccountNumber] = useState<string>("");
   const [branch, setBranch] = useState<string>("");
   const [bankName, setBankName] = useState<string>("");
+  const { pageCount, setPageCount } = usePageCountStore();
+
+  const router = useRouter();
+  const handlePrev = () => {
+    setPageCount(pageCount - 1);
+  };
 
   useEffect(() => {
     const storedBeneficiaryName = localStorage.getItem("beneficiaryName") || "";
@@ -55,15 +65,31 @@ const BankDetails = () => {
     localStorage.setItem("bankName", newBankName);
   };
 
+  const handleSubmit = () =>{
+    router.push("/dashboard")
+  }
+
   return (
     <>
       <div className="mx-auto items-start flex flex-col mt-8 w-[80vw] h-fit justify-around">
-        <h1 className="self-start text-3xl ">Bank Details</h1>
+        <div className="flex flex-row justify-between items-center w-full">
+          <RiArrowLeftSLine
+            size={30}
+            className="opacity-50 -mx-2"
+            onClick={handlePrev}
+          />
+          <div className="flex flex-row gap-2">
+            <div>4/4</div>
+            <div className="font-montserrat">Store Creation</div>
+          </div>
+          <RiArrowRightSLine size={30} className="opacity-0 -mx-2" />
+        </div>
+        <h1 className="self-start text-3xl mt-6">Bank Details</h1>
         <div className="items-center flex flex-col">
           <div className="my-2">
             <p className="text-[#211A1D] mb-1">Beneficiary Name</p>
             <input
-              className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={beneficiaryName}
               placeholder="Enter Beneficiary Name"
               onChange={handleBeneficiaryNameChange}
@@ -72,7 +98,7 @@ const BankDetails = () => {
           <div className="my-2">
             <p className="text-[#211A1D] mb-1">IFSC Code</p>
             <input
-              className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={ifscCode}
               placeholder="XXXXXXXXXXX"
               onChange={handleIfscCodeChange}
@@ -81,7 +107,7 @@ const BankDetails = () => {
           <div className="my-2">
             <p className="text-[#211A1D] mb-1">Account Number</p>
             <input
-              className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={accountNumber}
               placeholder="0000000000"
               onChange={handleAccountNumberChange}
@@ -90,7 +116,7 @@ const BankDetails = () => {
           <div className="my-2">
             <p className="text-[#211A1D] mb-1">Branch</p>
             <input
-              className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={branch}
               placeholder="Enter Branch"
               onChange={handleBranchChange}
@@ -99,11 +125,15 @@ const BankDetails = () => {
           <div className="my-2">
             <p className="text-[#211A1D] mb-1">Bank Name</p>
             <input
-              className="h-12 w-[80vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[80vw] placeholder:text-[12px] bg-white rounded-lg p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               value={bankName}
               placeholder="Enter Bank Name"
               onChange={handleBankNameChange}
             ></input>
+          </div>
+
+          <div className="my-2">
+            <PrimaryButton label="Submit" onClick={handleSubmit} />
           </div>
         </div>
       </div>

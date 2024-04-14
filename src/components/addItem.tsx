@@ -6,6 +6,8 @@ import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
 import axios from "axios";
+import { FaMicrophone } from "react-icons/fa";
+import { PiNotepad } from "react-icons/pi";
 
 const AddItem = () => {
   const [audio, setAudio] = useState<Blob | null>(null);
@@ -82,7 +84,7 @@ const AddItem = () => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2 items-center mt-12">
           <CatalogueButton
-            icon="/assets/images/button/mic.svg"
+            children={<FaMicrophone />}
             label="Record audio describing item"
             onClick={toggleShowAudio}
           />
@@ -123,10 +125,11 @@ const AddItem = () => {
             <div className="w-[45%] h-[1px] bg-black" />
           </div>
           <CatalogueButton
-            icon="/assets/images/button/notepad.svg"
+            children={<PiNotepad />}
             label="Input item description manually"
             onClick={() => {}}
           />
+          <p className="my-4">You can skip this section for now</p>
         </div>
       </div>
     </div>

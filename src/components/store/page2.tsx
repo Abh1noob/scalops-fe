@@ -1,4 +1,6 @@
+import { usePageCountStore } from "@/store/store";
 import React, { useEffect, useState } from "react";
+import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
 const Page2 = () => {
   const [address, setAddress] = useState<string>("");
@@ -6,6 +8,19 @@ const Page2 = () => {
   const [state, setState] = useState<string>("");
   const [zipCode, setZipCode] = useState<string>("");
   const [country, setCountry] = useState<string>("");
+
+  const { pageCount, setPageCount } = usePageCountStore();
+
+  const handleNext = () => {
+    console.log("New Page Count: ", pageCount);
+    setPageCount(pageCount + 1);
+  };
+
+  const handlePrev = () => {
+    console.log("New Page Count: ", pageCount);
+    setPageCount(pageCount - 1);
+  };
+  
 
   useEffect(() => {
     const storedAddress = localStorage.getItem("address") || "";
@@ -55,9 +70,21 @@ const Page2 = () => {
 
   return (
     <div className="m-8">
-      <div className="flex flex-row gap-10">
-        <div>2/3</div>
-        <div className="font-montserrat">Store Creation</div>
+      <div className="flex flex-row justify-between items-center ">
+        <RiArrowLeftSLine
+          size={30}
+          className="opacity-50 -mx-2"
+          onClick={handlePrev}
+        />
+        <div className="flex flex-row gap-2">
+          <div>2/4</div>
+          <div className="font-montserrat">Store Creation</div>
+        </div>
+        <RiArrowRightSLine
+          size={30}
+          className="opacity-50 -mx-2"
+          onClick={handleNext}
+        />
       </div>
       <h1 className="my-4 text-3xl text-[#211A1D]">Enter Store Address</h1>
       <p className="text-[#211A1D] font-montserrat">
@@ -68,7 +95,7 @@ const Page2 = () => {
       <div className="mb-2 mt-6 ">
         <p className="text-[#211A1D] mb-1">Address</p>
         <textarea
-          className="h-fit w-full bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+          className="h-fit w-full bg-white rounded-lg  placeholder:text-[12px] p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
           placeholder="Enter the address of your store"
           rows={3}
           value={address}
@@ -80,7 +107,7 @@ const Page2 = () => {
           <div className="mb-2 mt-6">
             <p className="text-[#211A1D] mb-1">City</p>
             <input
-              className="h-12 w-[38vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[38vw] bg-white rounded-lg placeholder:text-[12px] p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               placeholder="Enter City"
               value={city}
               onChange={handleCityChange}
@@ -89,7 +116,7 @@ const Page2 = () => {
           <div className="mb-2 mt-6">
             <p className="text-[#211A1D] mb-1">State</p>
             <input
-              className="h-12 w-[38vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[38vw] bg-white rounded-lg placeholder:text-[12px] p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               placeholder="Enter State"
               value={state}
               onChange={handleStateChange}
@@ -101,7 +128,7 @@ const Page2 = () => {
           <div className="mb-2 mt-6">
             <p className="text-[#211A1D] mb-1">Zip Code</p>
             <input
-              className="h-12 w-[38vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[38vw] bg-white rounded-lg placeholder:text-[12px] p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               placeholder="Enter Zip Code"
               value={zipCode}
               onChange={handleZipCodeChange}
@@ -110,7 +137,7 @@ const Page2 = () => {
           <div className="mb-2 mt-6">
             <p className="text-[#211A1D] mb-1">Country</p>
             <input
-              className="h-12 w-[38vw] bg-white rounded-lg p-2 border-2 border-gray-200 placeholder-[#211a1d80]"
+              className="h-12 w-[38vw] bg-white rounded-lg placeholder:text-[12px] p-4 border-2 border-gray-200 placeholder-[#211a1d80]"
               placeholder="Enter Country"
               value={country}
               onChange={handleCountryChange}
