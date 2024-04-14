@@ -102,6 +102,15 @@ const Dashboard = () => {
         >
           View full performance report
         </div>
+
+        <div
+          className="bg-[#8075FF] font-montserrat h-12 w-full flex items-center justify-center rounded-[20px] p-2 font-medium text-lg mt-6"
+          onClick={() => {
+            router.push("/catalogue");
+          }}
+        >
+          Catalogue Update
+        </div>
         <h1 className="my-4 text-3xl text-[#211A1D] mt-10">Popular Products</h1>
       </div>
     </div>

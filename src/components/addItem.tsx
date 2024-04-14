@@ -50,7 +50,9 @@ const AddItem = () => {
           // withCredentials: true,
         }
       );
+      const responseDataString = JSON.stringify(response.data);
       console.log("Response:", response.data);
+      localStorage.setItem("speakData", responseDataString);
     } catch (error) {
       console.error("Error sending audio:", error);
     }
